@@ -20,11 +20,13 @@ data <- read_rds("data.rds")
 
 y_choices <- c("Loves" = "Loves",
                   "Stars" = "Stars",
-                  "Number of Reviews" = "Number_of_reviews")
+                  "Number of Reviews" = "Number_of_reviews", 
+               "Price" = "Price")
 
 x_choices <- c("Loves" = "Loves",
                "Stars" = "Stars",
-               "Number of Reviews" = "Number_of_reviews")
+               "Number of Reviews" = "Number_of_reviews", 
+               "Price" = "Price")
 
 clean_choices <- c("Parabens" = "Parabens",
                     "Clean at Sephora" =  "Clean_at_Sephora")
@@ -39,14 +41,14 @@ ui <- fluidPage(
    # Sidebar with a slider inputs
    sidebarLayout(position = "left",
       sidebarPanel(
-sliderInput("Number_of_reviews", "Reviews",
-                                 345, 1000, value=c(350, 400)),
+sliderInput("Number_of_reviews", "Amount of reviews",
+                                 345, 1000, value=c(345, 1000)),
 sliderInput("Price", "Price",
-                  26, 215, value=c(30, 200)), 
-sliderInput("Loves", "Minimum amount of loves",
-               20000, 150000, value=c(30000, 120000)),
-sliderInput("Stars", "Minimum number of stars ",
-            3.6, 4.6, value=c(4.0, 4.4)),
+                  26, 215, value=c(26, 215)), 
+sliderInput("Loves", "Amount of loves (level of interest)",
+               20000, 150000, value=c(20000, 150000)),
+sliderInput("Stars", "Star rating out of five ",
+            3.6, 4.6, value=c(3.6, 4.6)),
 selectInput("Category", "Product Category",
             c("All","Moisturizer","SPF", "Eye Cream", "Mask", "Treatments", 
               "Toner/Essence", "Exfoliator", "Cleanser")),
@@ -80,17 +82,12 @@ server <- function(input, output) {
     # Due to dplyr issue #318, we need temp variables for input values
   
   output$barPlot <- renderPlotly({
-    # newdata <- data %>% 
-    #   filter(Price >= input$Price[1] & Price <= input$Price[2]) %>%
-    # filter(Stars >= input$Stars[1] & Stars <= input$Stars[2]) %>%
-    # filter(Loves >= input$Loves[1] & Loves <= input$Loves[2]) %>%
-    # filter(Number_of_reviews>= input$Number_of_reviews[1] & Number_of_reviews <= input$Number_of_reviews[2])
-    # 
-    # if (input$Category != "All") {
-    #   newdata <- newdata %>% filter(Category == input$Category)
-    # }
+
+if (input$Category != "All") {
+data <- data %>% filter(Category == input$Category)
+ }
     
-    data %>% 
+     data %>% 
       filter(Price >= input$Price[1] & Price <= input$Price[2]) %>%
       filter(Stars >= input$Stars[1] & Stars <= input$Stars[2]) %>%
       filter(Loves >= input$Loves[1] & Loves <= input$Loves[2]) %>%
@@ -99,7 +96,7 @@ server <- function(input, output) {
     geom_point(aes(text = Product_name)) 
   })
   
-  output$table <- DT::renderDataTable({data})
+  output$table <- DT::renderDataTable({data}) 
 }
 
 

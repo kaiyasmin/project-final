@@ -18,8 +18,5 @@ data <- read_csv("sephora2.csv")
 write_rds(data, "project-final/data.rds")  
 ```
 
-```{r}
-
-```
 
 
