@@ -15,18 +15,21 @@ library(stringr)
 
 data <- read_rds("data.rds") 
 
-axis_vars <- c(
-  "Number of reviews" = "Number_of_reviews",
-  "Number of stars" = "Stars",
-  "Number of loves" = "Loves"
-)
+y_choices <- c("Loves" = "Loves",
+                  "Stars" = "Stars",
+                  "Number of Reviews" = "Number_of_reviews")
+
+x_choices <- c("Loves" = "Loves",
+               "Stars" = "Stars",
+               "Number of Reviews" = "Number_of_reviews")
+              
 
 
 # Define UI for application that draws a histogram
 ui <- fluidPage(
    
    # Application title
-   titlePanel("Product Explorer"),
+   titlePanel("Sephora Product Explorer"),
    
    # Sidebar with a slider input for number of bins 
    sidebarLayout(position = "left",
@@ -41,7 +44,16 @@ sliderInput("Stars", "Minimum number of stars ",
             3.6, 4.6, 4.0, step = 0.1),
 selectInput("Category", "Product Category",
             c("Moisturizer","SPF", "Eye Cream", "Mask", "Treatments", 
-              "Toner/Essence", "Exfoliator", "Cleanser"))
+              "Toner/Essence", "Exfoliator", "Cleanser")),
+selectInput(inputId = "y_choices",
+            label = "y_choices",
+            choices = y_choices,
+            selected = "Stars"),
+selectInput(inputId = "x_choices",
+            label = "x_choices",
+            choices = x_choices,
+            selected = "Loves")
+
 ),
       
 mainPanel(
@@ -54,9 +66,10 @@ mainPanel(
 server <- function(input, output) { 
   output$barPlot <- renderPlot({
   
+    
   data %>% 
-    ggplot(aes_string(x = "Stars", y = "Loves", col = "Parabens")) + geom_point() 
- 
+    ggplot(aes_string(x = input$x_choices, y = input$y_choices)) + geom_point() 
+    
   })
 }
 
