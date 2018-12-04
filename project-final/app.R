@@ -77,12 +77,10 @@ mainPanel(
 
 # Define server logic 
 server <- function(input, output) { 
-  
 
-    # Due to dplyr issue #318, we need temp variables for input values
   
   output$barPlot <- renderPlotly({
-
+    output$table <- DT::renderDataTable({data}) 
 if (input$Category != "All") {
 data <- data %>% filter(Category == input$Category)
  }
@@ -96,7 +94,6 @@ data <- data %>% filter(Category == input$Category)
     geom_point(aes(text = Product_name)) 
   })
   
-  output$table <- DT::renderDataTable({data}) 
 }
 
 
