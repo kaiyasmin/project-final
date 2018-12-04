@@ -65,7 +65,7 @@ selectInput(inputId = "clean_choices",
 ),
       
 mainPanel(
-  plotOutput("barPlot")
+  plotlyOutput("barPlot")
   
    )
   )
@@ -73,7 +73,7 @@ mainPanel(
 
 # Define server logic required to draw a histogram
 server <- function(input, output) { 
-  output$barPlot <- renderPlot({
+  output$barPlot <- renderPlotly({
   
     if (input$Category != "All") {
       data <- data %>% filter(Category == input$Category)
