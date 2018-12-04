@@ -91,7 +91,7 @@ data <- data %>% filter(Category == input$Category)
       filter(Loves >= input$Loves[1] & Loves <= input$Loves[2]) %>%
       filter(Number_of_reviews>= input$Number_of_reviews[1] & Number_of_reviews <= input$Number_of_reviews[2]) %>%
     ggplot(aes_string(x = input$x_choices, y = input$y_choices, color = input$clean_choices)) + 
-    geom_point(aes(text = Product_name)) 
+    geom_point(aes(text = Product_name)) + theme_minimal() 
   })
   
 }
