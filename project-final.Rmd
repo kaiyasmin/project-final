@@ -1,0 +1,25 @@
+---
+title: "project-finalrmd"
+author: "Kai Potter"
+date: "12/3/2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(knitr)
+library(readr)
+library(ggplot2)
+```
+
+```{r}
+data <- read_csv("sephora2.csv") 
+write_rds(data, "project-final/data.rds") 
+```
+
+```{r}
+data 
+```
+
+
