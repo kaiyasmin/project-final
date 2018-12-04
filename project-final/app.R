@@ -12,6 +12,7 @@ library(formattable)
 library(foreign)
 library(xml2)
 library(stringr)
+library(plotly)
 
 data <- read_rds("data.rds") 
 
@@ -65,6 +66,7 @@ selectInput(inputId = "clean_choices",
       
 mainPanel(
   plotOutput("barPlot")
+  
    )
   )
 )
@@ -79,7 +81,7 @@ server <- function(input, output) {
     
     
   data %>% 
-    ggplot(aes_string(x = input$x_choices, y = input$y_choices)) + geom_point() 
+    ggplot(aes_string(x = input$x_choices, y = input$y_choices, color = input$clean_choices, alpha = 0.5)) + geom_point() 
     
   })
 }
