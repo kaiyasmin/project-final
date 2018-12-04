@@ -30,7 +30,8 @@ x_choices <- c("Loves" = "Loves",
 
 clean_choices <- c("Parabens" = "Parabens",
                     "Clean at Sephora" =  "Clean_at_Sephora")
-              
+
+
 
 # Define UI for application that draws scatterplot
 ui <- fluidPage(
@@ -80,7 +81,15 @@ server <- function(input, output) {
 
   
   output$barPlot <- renderPlotly({
-    output$table <- DT::renderDataTable({data}) 
+    output$table <- DT::renderDataTable({data %>% rename('Clean at Sephora' = "Clean_at_Sephora", 
+                                                         'Product Name' = "Product_name", 
+                                                         'Product Brand' = "Product_brand", 
+                                                         'Number of reviews' = "Number_of_reviews", 
+                                                         'Sub-category' = "Sub_category"
+                                                         
+                                                         )})
+    
+    
 if (input$Category != "All") {
 data <- data %>% filter(Category == input$Category)
  }
