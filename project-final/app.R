@@ -35,9 +35,10 @@ clean_choices <- c("Parabens" = "Parabens",
 
 # Define UI for application that draws scatterplot
 ui <- fluidPage(
-   
    # Application title
    titlePanel("Sephora Product Explorer"), 
+   tabsetPanel(
+     tabPanel("Explorer",
    
    # Sidebar with a slider inputs
    sidebarLayout(position = "left",
@@ -67,13 +68,29 @@ selectInput(inputId = "clean_choices",
             selected = "Parabens")
 
 ),
-      
+
+
+
 mainPanel(
   plotlyOutput("barPlot"),
   DT::dataTableOutput("table")
   
+ 
+  
    )
   )
+),
+tabPanel("About", 
+         h3("lalala"),
+            h4("lalala")),
+            
+
+tabPanel("How it works",
+h3("lalala"),
+h4("lalala"))
+
+
+)
 )
 
 # Define server logic 
