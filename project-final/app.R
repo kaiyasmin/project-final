@@ -30,12 +30,11 @@ clean_choices <- c("Parabens" = "Parabens",
                     "Clean at Sephora" =  "Clean_at_Sephora")
               
 
-
 # Define UI for application that draws scatterplot
 ui <- fluidPage(
    
    # Application title
-   titlePanel("Sephora Product Explorer"),
+   titlePanel("Sephora Product Explorer"), 
    
    # Sidebar with a slider inputs
    sidebarLayout(position = "left",
@@ -43,7 +42,7 @@ ui <- fluidPage(
 sliderInput("Number_of_reviews", "Reviews",
                                  345, 1000, 635, step = 10),
 sliderInput("Price", "Price",
-                  26, 215, 80, step = 10),
+                  26, 215, 80, step = 10), 
 sliderInput("Loves", "Minimum amount of loves",
                20000, 150000, 40000, step = 10),
 sliderInput("Stars", "Minimum number of stars ",
@@ -52,15 +51,15 @@ selectInput("Category", "Product Category",
             c("All","Moisturizer","SPF", "Eye Cream", "Mask", "Treatments", 
               "Toner/Essence", "Exfoliator", "Cleanser")),
 selectInput(inputId = "y_choices",
-            label = "y_choices",
+            label = "Y-axis",
             choices = y_choices,
             selected = "Stars"),
 selectInput(inputId = "x_choices",
-            label = "x_choices",
+            label = "X-axis",
             choices = x_choices,
             selected = "Loves"), 
 selectInput(inputId = "clean_choices",
-            label = "clean_choices",
+            label = "Clean choices",
             choices = clean_choices,
             selected = "Parabens")
 
@@ -76,10 +75,9 @@ mainPanel(
 
 # Define server logic required to draw a histogram
 server <- function(input, output) { 
-  output$table <- DT::renderDataTable({
   output$barPlot <- renderPlotly({
+    output$table <- DT::renderDataTable({data})
     
-      
   
     if (input$Category != "All") {
       data <- data %>% filter(Category == input$Category)
@@ -88,9 +86,10 @@ server <- function(input, output) {
     
   data %>% 
     ggplot(aes_string(x = input$x_choices, y = input$y_choices, color = input$clean_choices)) + 
-    geom_point(aes(text = Product_name))
+    geom_point(aes(text = Product_name)) 
     
-  }) })
+  })
+
 }
 
 
