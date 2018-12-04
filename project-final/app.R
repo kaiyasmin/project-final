@@ -20,16 +20,16 @@ data <- read_rds("data.rds")
 
 y_choices <- c("Loves" = "Loves",
                   "Stars" = "Stars",
-                  "Number of Reviews" = "Number_of_reviews", 
+                  "Number of Reviews" = "Reviews", 
                "Price" = "Price")
 
 x_choices <- c("Loves" = "Loves",
                "Stars" = "Stars",
-               "Number of Reviews" = "Number_of_reviews", 
+               "Number of Reviews" = "Reviews", 
                "Price" = "Price")
 
 clean_choices <- c("Parabens" = "Parabens",
-                    "Clean at Sephora" =  "Clean_at_Sephora")
+                    "Clean at Sephora" =  "CleanSephora")
 
 
 
@@ -42,7 +42,7 @@ ui <- fluidPage(
    # Sidebar with a slider inputs
    sidebarLayout(position = "left",
       sidebarPanel(
-sliderInput("Number_of_reviews", "Amount of reviews",
+sliderInput("Reviews", "Amount of reviews",
                                  345, 1000, value=c(345, 1000)),
 sliderInput("Price", "Price",
                   26, 215, value=c(26, 215)), 
@@ -81,11 +81,11 @@ server <- function(input, output) {
 
   
   output$barPlot <- renderPlotly({
-    output$table <- DT::renderDataTable({data %>% rename('Clean at Sephora' = "Clean_at_Sephora", 
-                                                         'Product Name' = "Product_name", 
-                                                         'Product Brand' = "Product_brand", 
-                                                         'Number of reviews' = "Number_of_reviews", 
-                                                         'Sub-category' = "Sub_category"
+    output$table <- DT::renderDataTable({data %>% rename('Clean at Sephora' = "CleanSephora", 
+                                                         'Product Name' = "Product", 
+                                                         'Product Brand' = "Brand", 
+                                                         'Number of reviews' = "Reviews", 
+                                                         'Type' = "Type"
                                                          
                                                          )})
     
@@ -98,9 +98,9 @@ data <- data %>% filter(Category == input$Category)
       filter(Price >= input$Price[1] & Price <= input$Price[2]) %>%
       filter(Stars >= input$Stars[1] & Stars <= input$Stars[2]) %>%
       filter(Loves >= input$Loves[1] & Loves <= input$Loves[2]) %>%
-      filter(Number_of_reviews>= input$Number_of_reviews[1] & Number_of_reviews <= input$Number_of_reviews[2]) %>%
-    ggplot(aes_string(x = input$x_choices, y = input$y_choices, color = input$clean_choices)) + 
-    geom_point(aes(text = Product_name)) + theme_minimal() 
+      filter(Reviews>= input$Reviews[1] & Reviews <= input$Reviews[2]) %>%
+        ggplot(aes_string(x = input$x_choices, y = input$y_choices, color = input$clean_choices)) + 
+    geom_point(aes(label1= Product, label2= Brand, label3=Price)) + theme_minimal() 
   })
   
 }

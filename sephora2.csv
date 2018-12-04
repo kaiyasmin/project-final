@@ -1,4 +1,4 @@
-Product_name,Product_brand,Number_of_reviews,Stars,Loves,Price,Category ,Sub_category,Clean_at_Sephora,Parabens
+Product,Brand,Reviews,Stars,Loves,Price,Category ,Type,CleanSephora,Parabens
 Creme de la Mer,La Mer,394,4.1,50000,175,Moisturizer,Moisturizer,No,Yes
 Protini Polypeptide Cream,Drunk Elephant,1000,4.4,90000,68,Moisturizer,Moisturizer,Yes,No
 Cicapair Tiger Grass Color Correcting Treatment SPF 30,DR. JART+,1000,4.2,50000,52,SPF,SPF-Physical,No ,No
