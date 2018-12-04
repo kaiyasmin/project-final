@@ -22,6 +22,9 @@ y_choices <- c("Loves" = "Loves",
 x_choices <- c("Loves" = "Loves",
                "Stars" = "Stars",
                "Number of Reviews" = "Number_of_reviews")
+
+clean_choices <- c("Parabens" = "Parabens",
+                    "Clean at Sephora" =  "Clean at Sephora")
               
 
 
@@ -43,7 +46,7 @@ sliderInput("Loves", "Minimum amount of loves",
 sliderInput("Stars", "Minimum number of stars ",
             3.6, 4.6, 4.0, step = 0.1),
 selectInput("Category", "Product Category",
-            c("Moisturizer","SPF", "Eye Cream", "Mask", "Treatments", 
+            c("All","Moisturizer","SPF", "Eye Cream", "Mask", "Treatments", 
               "Toner/Essence", "Exfoliator", "Cleanser")),
 selectInput(inputId = "y_choices",
             label = "y_choices",
@@ -52,7 +55,11 @@ selectInput(inputId = "y_choices",
 selectInput(inputId = "x_choices",
             label = "x_choices",
             choices = x_choices,
-            selected = "Loves")
+            selected = "Loves"), 
+selectInput(inputId = "clean_choices",
+            label = "clean_choices",
+            choices = clean_choices,
+            selected = "Parabens")
 
 ),
       
@@ -66,6 +73,10 @@ mainPanel(
 server <- function(input, output) { 
   output$barPlot <- renderPlot({
   
+    if (input$Category != "All") {
+      data <- data %>% filter(Category == input$Category)
+    }
+    
     
   data %>% 
     ggplot(aes_string(x = input$x_choices, y = input$y_choices)) + geom_point() 
