@@ -19,7 +19,7 @@ write_rds(data, "project-final/data.rds")
 ```
 
 ```{r}
-data 
+
 ```
 
 

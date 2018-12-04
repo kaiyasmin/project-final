@@ -13,8 +13,10 @@ library(foreign)
 library(xml2)
 library(stringr)
 library(plotly)
+library(DT)
 
-data <- read_rds("data.rds") 
+data <- read_rds("data.rds")
+  
 
 y_choices <- c("Loves" = "Loves",
                   "Stars" = "Stars",
@@ -25,17 +27,17 @@ x_choices <- c("Loves" = "Loves",
                "Number of Reviews" = "Number_of_reviews")
 
 clean_choices <- c("Parabens" = "Parabens",
-                    "Clean at Sephora" =  "Clean at Sephora")
+                    "Clean at Sephora" =  "Clean_at_Sephora")
               
 
 
-# Define UI for application that draws a histogram
+# Define UI for application that draws scatterplot
 ui <- fluidPage(
    
    # Application title
    titlePanel("Sephora Product Explorer"),
    
-   # Sidebar with a slider input for number of bins 
+   # Sidebar with a slider inputs
    sidebarLayout(position = "left",
       sidebarPanel(
 sliderInput("Number_of_reviews", "Reviews",
@@ -65,7 +67,8 @@ selectInput(inputId = "clean_choices",
 ),
       
 mainPanel(
-  plotlyOutput("barPlot")
+  plotlyOutput("barPlot"),
+  DT::dataTableOutput("table")
   
    )
   )
@@ -73,7 +76,10 @@ mainPanel(
 
 # Define server logic required to draw a histogram
 server <- function(input, output) { 
+  output$table <- DT::renderDataTable({
   output$barPlot <- renderPlotly({
+    
+      
   
     if (input$Category != "All") {
       data <- data %>% filter(Category == input$Category)
@@ -81,9 +87,10 @@ server <- function(input, output) {
     
     
   data %>% 
-    ggplot(aes_string(x = input$x_choices, y = input$y_choices, color = input$clean_choices, alpha = 0.5)) + geom_point() 
+    ggplot(aes_string(x = input$x_choices, y = input$y_choices, color = input$clean_choices)) + 
+    geom_point(aes(text = Product_name))
     
-  })
+  }) })
 }
 
 
