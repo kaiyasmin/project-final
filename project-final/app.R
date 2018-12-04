@@ -75,6 +75,34 @@ mainPanel(
 
 # Define server logic required to draw a histogram
 server <- function(input, output) { 
+  
+  products <- reactive({
+    # Due to dplyr issue #318, we need temp variables for input values
+   
+    minprice <- input$Price[1]
+    maxprice <- input$Price[2] 
+    minstars <- input$Stars[1]
+    maxstars <- input$Stars[2] 
+    minloves <- input$Loves[1]
+    maxloves <- input$Loves[2]
+    minreviews <- input$Number_of_reviews[1]
+    maxreviews<- input$Number_of_reviews[2]  
+  
+
+    # Apply filters
+    newdata <- products %>%
+      filter(
+        Price >= minprice,
+        Price <= maxprice, 
+        Stars >= minstars,
+        Stars <= maxstars,
+        Year >= minloves,
+        Year <= maxloves,
+        Reviews >= minreviews,
+        Reviews <= maxreviews)})
+  
+  
+  
   output$barPlot <- renderPlotly({
     output$table <- DT::renderDataTable({data})
     
@@ -83,8 +111,7 @@ server <- function(input, output) {
       data <- data %>% filter(Category == input$Category)
     }
     
-    
-  data %>% 
+  newdata %>% 
     ggplot(aes_string(x = input$x_choices, y = input$y_choices, color = input$clean_choices)) + 
     geom_point(aes(text = Product_name)) 
     

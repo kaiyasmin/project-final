@@ -15,7 +15,7 @@ library(ggplot2)
 
 ```{r}
 data <- read_csv("sephora2.csv") 
-write_rds(data, "project-final/data.rds") 
+write_rds(data, "project-final/data.rds")  
 ```
 
 ```{r}
