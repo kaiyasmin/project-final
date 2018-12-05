@@ -17,3 +17,5 @@ Besides from seeing if the ingredients will actually work for you, the app provi
 Sephora has recently started to give products with clean ingredients a “Clean at Sephora” seal, meaning that they are free of “sulfates SLS and SLES, parabens, formaldehydes, formaldehyde-releasing agents, phthalates, mineral oil, retinyl palmitate, oxybenzone, coal tar, hydroquinone, triclosan, and triclocarban.”(https://www.sephora.com/clean-beauty-products). 
 
 Aside from giving users a choice to view the products that have the seal and also see products that have parabens in them, it may also be an interesting insight for Sephora to see if a “Clean at Sephora” seal means anything for level of interest or star rating, compared to products without it. 
+
+Here is the link to the final application: https://kai-potter.shinyapps.io/project-final/ 
