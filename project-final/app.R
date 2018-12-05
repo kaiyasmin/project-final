@@ -116,8 +116,24 @@ You can color code ingredients with a 'Clean at Sephora' filter, or a 'Parabens'
             
 
 tabPanel("How it works",
-h3("lalala"),
-h4("lalala"))
+h4("Simply hover over the points in the graph to see more information 
+   about each product. For more information, consult the table for all
+   information plus product and ingredient breakdown links. There are 
+   five ways to filter the information in a way that you need:"),
+h5("1. Amount of reviews. You can choose to see products with a 
+certain amount of reviews, as the more reviews there are, the more
+   accurate the rating is likely to be. "),
+h5("2. Price. Have a budget? Don’t waste your time, filter by price 
+to eliminate products that are out of your price range." ),
+h5("3. Amount of loves. Want to see the products with the most hype?
+   Filter by amount of loves to see the products that have the biggest buzz."),
+h5("4. Stars. What really matters. Filter by star rating to get the
+   products that perform the best, according to customers."),
+h5("5. Clean choices. Concerned about ingredients? Check out the 
+legend and color code products that have the ‘Clean by Sephora’ seal,
+and products that have parabens." ),
+h5("You can also change what is on the X and Y axis to view different insights,
+or to simply customize the layout so it works for you." ))
 
 
 )
