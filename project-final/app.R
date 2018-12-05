@@ -14,10 +14,10 @@ library(xml2)
 library(stringr)
 library(plotly)
 library(DT)
-
+#I am reading in the data I need to make the app using .rds. 
 data <- read_rds("data.rds")
   
-
+#Here I am defining the choices of variables that can go on the X & Y axis, so it is ready to use when I create select input functions in my UI.
 y_choices <- c("Loves" = "Loves",
                   "Stars" = "Stars",
                   "Number of Reviews" = "Reviews", 
@@ -27,20 +27,25 @@ x_choices <- c("Loves" = "Loves",
                "Stars" = "Stars",
                "Number of Reviews" = "Reviews", 
                "Price" = "Price")
-
+# I also need to do the same thing for clean choices, the two variables that will be able to be seen through color and a legend.
+#I had issues with variable names because they had spaces so that's why I went back into my raw data and changed names so it would be easier to work with. 
 clean_choices <- c("Parabens" = "Parabens",
                     "Clean at Sephora" =  "CleanSephora")
 
 
 
-# Define UI for application that draws scatterplot
+# Here I am defining the UI for application that draws scatterplot.
 ui <- fluidPage(
-   # Application title
+   # Here is my application title
    titlePanel("Sephora Skincare Bestsellers Explorer"), 
+   #I want tabs to organize and provide more information in my app.
    tabsetPanel(
+     #The first tab is the interactive graph so I labeled it Explorer. 
      tabPanel("Explorer",
    
    # Sidebar with a slider inputs
+   # I wanted to give the user as much flexibility as possible in terms of narrowing and broadening the data to what they want to see and what will be relevant to them. 
+   # I used slider input for various variables and set the values to the minimum and maximum, so they can get the full picture first, and then play around with the data themselves.
    sidebarLayout(position = "left",
       sidebarPanel(
 sliderInput("Reviews", "Amount of reviews",
@@ -51,9 +56,13 @@ sliderInput("Loves", "Amount of loves (level of interest)",
                20000, 150000, value=c(20000, 150000)),
 sliderInput("Stars", "Star rating out of five ",
             3.6, 4.6, value=c(3.6, 4.6)),
+# I want the user to be able to narrow down by category of product, so I used select input here. 
 selectInput("Category", "Product Category",
             c("All","Moisturizer","SPF", "Eye Cream", "Mask", "Treatments", 
               "Toner/Essence", "Exfoliator", "Cleanser")),
+# These select inputs allow the user to choose what they want to have on each of the axis.
+# It also lets them color code the products that have parabens in them, or ones that have been given Clean At Sephora certification. 
+# This is a clean way of showing many useful types of information without cluttering or overwhelming the user. 
 selectInput(inputId = "y_choices",
             label = "Y-axis",
             choices = y_choices,
@@ -70,9 +79,10 @@ selectInput(inputId = "clean_choices",
 ),
 
 
-
+# Here I define my outputs. I am using the package plotly because I needed tooltips for the explorer to work, hence it is plotlyOutput instead of plotOutput.
 mainPanel(
   plotlyOutput("barPlot"),
+  #I also want a table to supplement the information in the graph, so I added it here.
   DT::dataTableOutput("table")
   
  
@@ -80,6 +90,7 @@ mainPanel(
    )
   )
 ),
+# This tab panel is explaning the purpose of the app. 
 tabPanel("About", 
          h4("This Sephora Skincare Bestsellers Explorer was made to help
 you get acquainted with skincare in an accessible and informed way."),
@@ -114,7 +125,7 @@ parabens, formaldehydes, formaldehyde-releasing agents, phthalates, mineral oil,
 retinyl palmitate, oxybenzone, coal tar, hydroquinone, triclosan, and triclocarban.'
 You can color code ingredients with a 'Clean at Sephora' filter, or a 'Parabens' filter.")),
             
-
+#This tab panel is explaning how the app works. There is going to be a tab for creating a skincare routine.
 tabPanel("How it works",
 h4("Simply hover over the points in the graph to see more information 
    about each product. For more information, consult the table for all
@@ -139,11 +150,12 @@ or to simply customize the layout so it works for you." ))
 )
 )
 
-# Define server logic 
+# Here I define the server logic 
 server <- function(input, output) { 
 
-  
+  #Here I have to use renderPlotly, so my graph has the tooltips that are part of the plotly package. 
   output$barPlot <- renderPlotly({
+    #My variables names are a bit messy in the table, so I rename them here. 
     output$table <- DT::renderDataTable({data %>% rename('Clean at Sephora' = "CleanSephora", 
                                                          'Product Name' = "Product", 
                                                          'Product Brand' = "Brand", 
@@ -152,17 +164,23 @@ server <- function(input, output) {
                                                          
                                                          )})
     
-    
+    # I wanted an All category as well as individual product categories, so I made an if statement and used filter to make it work. 
 if (input$Category != "All") {
 data <- data %>% filter(Category == input$Category)
  }
+    #Here I am using filter to get the highest and lowest value for every variable that I want on a slider. 
     
      data %>% 
       filter(Price >= input$Price[1] & Price <= input$Price[2]) %>%
       filter(Stars >= input$Stars[1] & Stars <= input$Stars[2]) %>%
       filter(Loves >= input$Loves[1] & Loves <= input$Loves[2]) %>%
       filter(Reviews>= input$Reviews[1] & Reviews <= input$Reviews[2]) %>%
+       # Here I use aes_string so my predefined choices can be assigned to x and y and color. 
         ggplot(aes_string(x = input$x_choices, y = input$y_choices, color = input$clean_choices)) + 
+       # It was a struggle trying to change the information in the plotly tooltip.
+       # as plotly can be quite rigid with customization, but I figured out that 
+       #I could use labels for each info point I want to display. 
+       #I added theme_minimal as I wanted to make the app look classier and more user friendly.
     geom_point(aes(label1= Product, label2= Brand, label3=Price)) + theme_minimal() 
   })
   
@@ -170,6 +188,6 @@ data <- data %>% filter(Category == input$Category)
 
 
 
-# Run the application 
+# Running the application 
 shinyApp(ui = ui, server = server)
 
