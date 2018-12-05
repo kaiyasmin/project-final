@@ -18,4 +18,6 @@ Sephora has recently started to give products with clean ingredients a “Clean 
 
 Aside from giving users a choice to view the products that have the seal and also see products that have parabens in them, it may also be an interesting insight for Sephora to see if a “Clean at Sephora” seal means anything for level of interest or star rating, compared to products without it. 
 
-Here is the link to the final application: https://kai-potter.shinyapps.io/project-final/ 
+Here is the link to the final application: https://kai-potter.shinyapps.io/project-final/. 
+
+My app was inspired by Shiny's Movie Explorer sample app, link here: https://shiny.rstudio.com/gallery/movie-explorer.html 
