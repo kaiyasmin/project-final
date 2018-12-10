@@ -49,16 +49,16 @@ ui <- fluidPage(
    sidebarLayout(position = "left",
       sidebarPanel(
 sliderInput("Reviews", "Amount of reviews",
-                                 345, 1000, value=c(345, 1000)),
+                                 100, 10000, value=c(100, 10000)),
 sliderInput("Price", "Price",
                   26, 215, value=c(26, 215)), 
 sliderInput("Loves", "Amount of loves (level of interest)",
-               20000, 150000, value=c(20000, 150000)),
+               10000, 150000, value=c(10000, 150000)),
 sliderInput("Stars", "Star rating out of five ",
             3.6, 4.6, value=c(3.6, 4.6)),
 # I want the user to be able to narrow down by category of product, so I used select input here. 
 selectInput("Category", "Product Category",
-            c("All","Moisturizer","SPF", "Eye Cream", "Mask", "Treatments", 
+            c("All","Moisturizer","SPF", "Mask", "Treatments", 
               "Toner/Essence", "Exfoliator", "Cleanser")),
 # These select inputs allow the user to choose what they want to have on each of the axis.
 # It also lets them color code the products that have parabens in them, or ones that have been given Clean At Sephora certification. 
@@ -95,7 +95,7 @@ tabPanel("About",
          h4("This Sephora Skincare Bestsellers Explorer was made to help
 you get acquainted with skincare in an accessible and informed way."),
          h5("Creating a skincare routine from scratch can be overwhelming,
-               due to the wide variety of options. This app takes the top 30 
+               due to the wide variety of options. This app takes the top 20 
             bestsellers from each product category, and shows the review 
             statistics for each one all in one place, so you can see for
             yourself if a product lives up to the hype, whether you really
@@ -181,7 +181,7 @@ data <- data %>% filter(Category == input$Category)
        # as plotly can be quite rigid with customization, but I figured out that 
        #I could use labels for each info point I want to display. 
        #I added theme_minimal as I wanted to make the app look classier and more user friendly.
-    geom_point(aes(label1= Product, label2= Brand, label3=Price)) + theme_minimal() 
+    geom_point(aes(label1= Product, label2= Brand, label3=Price)) + theme_minimal() +scale_alpha_continuous()
   })
   
 }
