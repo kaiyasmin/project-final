@@ -49,13 +49,13 @@ ui <- fluidPage(
    sidebarLayout(position = "left",
       sidebarPanel(
 sliderInput("Reviews", "Amount of reviews",
-                                 100, 10000, value=c(100, 10000)),
+                                 1, 15000, value=c(1, 15000)),
 sliderInput("Price", "Price",
-                  26, 215, value=c(26, 215)), 
+                  5, 215, value=c(5, 215)), 
 sliderInput("Loves", "Amount of loves (level of interest)",
-               10000, 150000, value=c(10000, 150000)),
+               1, 150000, value=c(100, 150000, step = 1000)),
 sliderInput("Stars", "Star rating out of five ",
-            3.6, 4.6, value=c(3.6, 4.6)),
+            3.0, 5.0, value=c(3.0, 5.0)),
 # I want the user to be able to narrow down by category of product, so I used select input here. 
 selectInput("Category", "Product Category",
             c("All","Moisturizer","SPF", "Mask", "Treatments", 
@@ -181,7 +181,7 @@ data <- data %>% filter(Category == input$Category)
        # as plotly can be quite rigid with customization, but I figured out that 
        #I could use labels for each info point I want to display. 
        #I added theme_minimal as I wanted to make the app look classier and more user friendly.
-    geom_point(aes(label1= Product, label2= Brand, label3=Price)) + theme_minimal() +scale_alpha_continuous()
+    geom_point(aes(label1= Product, label2= Brand, label3=Price)) + theme_minimal() 
   })
   
 }
