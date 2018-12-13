@@ -90,21 +90,22 @@ mainPanel(
    )
   )
 ),
-# This tab panel is explaning the purpose of the app. 
+# This tab panel is explaining the purpose of the app. 
 tabPanel("About", 
          h4("This Sephora Skincare Bestsellers Explorer was made to help
 you get acquainted with skincare in an accessible and informed way."),
          h5("Creating a skincare routine from scratch can be overwhelming,
                due to the wide variety of options. This app takes the top 20 
-            bestsellers from each product category, and shows the review 
+            bestsellers from each product category on the Sephora website, and shows the review 
             statistics for each one all in one place, so you can see for
             yourself if a product lives up to the hype, whether you really
             need that expensive exfoliator, or if you can go with another 
             brand that is just as good?"),
          h5("If you're curious about a product but you're not sure if 
 it will work for you, why don't you click on the SkinCarisma.com 
-link for a  thorough ingredient breakdown? If you're acne prone, 
-you're going to want to steer clear of ingredients with a high comedogenic rating."),
+link for a  thorough ingredient breakdown? For example, iff you're acne prone, 
+you're going to want to steer clear of ingredients with a high comedogenic rating
+            (this means there's a high chance it can clog pores!)"),
          h5("If a product claims to be anti-aging, you can check to see if the
             ingredients actually support its claims. If it has super-star ingredients
             such as retinoids or niacinamide for brightening, it's a go! 
@@ -124,27 +125,39 @@ a 'Clean at Sephora' seal, meaning that they are free of 'sulfates SLS and SLES,
 parabens, formaldehydes, formaldehyde-releasing agents, phthalates, mineral oil, 
 retinyl palmitate, oxybenzone, coal tar, hydroquinone, triclosan, and triclocarban.'
 You can color code ingredients with a 'Clean at Sephora' filter, or a 'Parabens' filter.")),
-            
-#This tab panel is explaning how the app works. There is going to be a tab for creating a skincare routine.
-tabPanel("How it works",
-h4("Simply hover over the points in the graph to see more information 
-   about each product. For more information, consult the table for all
+      
+tabPanel("How does this work?",
+         h4("Simply hover over the points in the graph to see more information 
+   about each product. For even more information, consult the table for all
    information plus product and ingredient breakdown links. There are 
    five ways to filter the information in a way that you need:"),
-h5("1. Amount of reviews. You can choose to see products with a 
+         h5("1. Amount of reviews. You can choose to see products with a 
 certain amount of reviews, as the more reviews there are, the more
    accurate the rating is likely to be. "),
-h5("2. Price. Have a budget? Don’t waste your time, filter by price 
+         h5("2. Price. Have a budget? Don’t waste your time, filter by price 
 to eliminate products that are out of your price range." ),
-h5("3. Amount of loves. Want to see the products with the most hype?
+         h5("3. Amount of loves. This is an indicator of popularity, the number of loves 
+correlates to the number of people who have expressed interest in the product, but they
+may not have necessarily bought it yet. Want to see the products with the most hype?
    Filter by amount of loves to see the products that have the biggest buzz."),
-h5("4. Stars. What really matters. Filter by star rating to get the
+         h5("4. Stars. What really matters. Filter by star rating to get the
    products that perform the best, according to customers."),
-h5("5. Clean choices. Concerned about ingredients? Check out the 
+         h5("5. Clean choices. Concerned about ingredients? Check out the 
 legend and color code products that have the ‘Clean by Sephora’ seal,
 and products that have parabens." ),
-h5("You can also change what is on the X and Y axis to view different insights,
-or to simply customize the layout so it works for you." ))
+         h5("You can also change what is on the X and Y axis to view different insights,
+or to simply customize the layout so it works for you." )),
+
+      
+#This tab panel is showing observations and analysis. To be honest, as seeing as the app is made for people to make their own informed decisions about skincare thats right for them, I didn't want to include a 'conclusion' or 'analysis' part of the app to stay impartial and let the data speak for itself, but for the sake of final project grading I will have such a tab. 
+tabPanel("Observations & Analysis",
+h4("S:"),
+h5("d "),
+h5("2. " ),
+h5("3. "),
+h5("4. "),
+h5("5. " ),
+h5("dd" ))
 
 
 )
