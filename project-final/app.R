@@ -55,7 +55,7 @@ sliderInput("Price", "Price",
 sliderInput("Loves", "Amount of loves (level of interest)",
                1, 150000, value=c(100, 150000, step = 1000)),
 sliderInput("Stars", "Star rating out of five ",
-            3.0, 5.0, value=c(3.0, 5.0)),
+            2.9, 5.0, value=c(2.9, 5.0, step = 0.1)),
 # I want the user to be able to narrow down by category of product, so I used select input here. 
 selectInput("Category", "Product Category",
             c("All","Moisturizer","SPF", "Mask", "Treatments", 
@@ -92,7 +92,7 @@ mainPanel(
 ),
 # This tab panel is explaining the purpose of the app. 
 tabPanel("About", 
-         h4("This Sephora Skincare Bestsellers Explorer was made to help
+         h4("The Sephora Skincare Bestsellers Explorer was made to help
 you get acquainted with skincare in an accessible and informed way."),
          h5("Creating a skincare routine from scratch can be overwhelming,
                due to the wide variety of options. This app takes the top 20 
@@ -100,17 +100,18 @@ you get acquainted with skincare in an accessible and informed way."),
             statistics for each one all in one place, so you can see for
             yourself if a product lives up to the hype, whether you really
             need that expensive exfoliator, or if you can go with another 
-            brand that is just as good?"),
+            brand that is just as good."),
          h5("If you're curious about a product but you're not sure if 
-it will work for you, why don't you click on the SkinCarisma.com 
-link for a  thorough ingredient breakdown? For example, iff you're acne prone, 
+it will work for you, why don't you look at the ingredient breakdown? There is a URL
+to SkinCarisma.com for every product, which explains the pros and cons of the product's 
+ingredients. For example, if you're acne prone, 
 you're going to want to steer clear of ingredients with a high comedogenic rating
             (this means there's a high chance it can clog pores!)"),
          h5("If a product claims to be anti-aging, you can check to see if the
             ingredients actually support its claims. If it has super-star ingredients
             such as retinoids or niacinamide for brightening, it's a go! 
             Don't worry about not knowing exactly what these ingredients are,
-            SkinCarisma simply tells you the properties of each ingredient so
+            the ingredients link simply tells you the properties of each ingredient so
             YOU can decide if a product is right for you, instead of letting 
             marketing fluff tell you what is right."),
          h5("While the skincare industry is the biggest segment in the beauty market,
@@ -124,8 +125,10 @@ you're going to want to steer clear of ingredients with a high comedogenic ratin
 a 'Clean at Sephora' seal, meaning that they are free of 'sulfates SLS and SLES,
 parabens, formaldehydes, formaldehyde-releasing agents, phthalates, mineral oil, 
 retinyl palmitate, oxybenzone, coal tar, hydroquinone, triclosan, and triclocarban.'
-You can color code ingredients with a 'Clean at Sephora' filter, or a 'Parabens' filter.")),
-      
+You can color code ingredients with a 'Clean at Sephora' filter, or a 'Parabens' filter."), 
+         h5("By Kai Potter for the GOV1005 Final Project.")),
+
+# This tab explains the variables and how everything works. 
 tabPanel("How does this work?",
          h4("Simply hover over the points in the graph to see more information 
    about each product. For even more information, consult the table for all
@@ -146,18 +149,38 @@ may not have necessarily bought it yet. Want to see the products with the most h
 legend and color code products that have the ‘Clean by Sephora’ seal,
 and products that have parabens." ),
          h5("You can also change what is on the X and Y axis to view different insights,
-or to simply customize the layout so it works for you." )),
+or to simply customize the layout so it works for you. You can also search for certain brands
+or products in the table. " )),
 
       
 #This tab panel is showing observations and analysis. To be honest, as seeing as the app is made for people to make their own informed decisions about skincare thats right for them, I didn't want to include a 'conclusion' or 'analysis' part of the app to stay impartial and let the data speak for itself, but for the sake of final project grading I will have such a tab. 
-tabPanel("Observations & Analysis",
-h4("S:"),
-h5("d "),
-h5("2. " ),
-h5("3. "),
-h5("4. "),
-h5("5. " ),
-h5("dd" ))
+tabPanel("Observations",
+h4("To be honest, as seeing as the app was made for people to make their own
+   informed decisions about skincare thats right for them, I didn't want to 
+   include a 'conclusion' or 'analysis' part of the app in order to stay impartial
+   and let the data speak for itself. But, for the sake of final project grading 
+   I will share a few interesting things I’ve noticed in playing around with the data."),
+h5("Loves, an indicator of popularity, does not correlate to the star rating,
+   which is indicative of quality. A lot of products don’t have a major number of 
+   loves, but their rating is high. Actually, for products with 100,000 - 150,000 loves,
+   only 5 of them had a rating above 4.5. For products with 0 - 50,000 loves,
+   19 products had a rating above 4.5. There are some underrated skincare gems out there!"),
+h5("‘Clean’ products are not always expensive. Most products with the ‘Clean at Sephora’ 
+certification are between $25 to $50 dollars, and no ‘Clean at Sephora’ products 
+surpassed a price tag of $100." ),
+h5("On the other hand, there is a perception that only cheap products have parabens
+in their ingredients, but according to the Sephora bestsellers list, this is not true. 
+The two most expensive brands at Sephora, SK-II and La Mer, use parabens in the
+majority of their products that are on the list."),
+h5("Products containing parabens mostly have under 60,000 loves, with the exception
+   of one product - The Purity Made Simple Cleanser by PHILOSOPHY which has a whopping 
+   150,000 likes. After digging deep to find out why this was an anomaly amongst products
+   containing parabens, I came to the conclusion that the company may be ‘Green-washing’
+   this product.  This is the phenomenon where a product’s packaging or marketing claims
+   or gives the impression that it’s natural or environmentally friendly, but in reality, 
+   it isn’t. The bottle has a stripped back design and a block of text talking about 
+   how clean, pure and natural the cleanser is, yet the ingredients are anything but. We should 
+   be careful and actually inspect what is in the products we buy. "))
 
 
 )

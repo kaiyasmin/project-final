@@ -5,8 +5,8 @@ account: kai-potter
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 603669
-bundleId: 1759859
+bundleId: 1761993
 url: https://kai-potter.shinyapps.io/project-final/
-when: 1544668230.85955
+when: 1544740631.70582
 asMultiple: FALSE
 asStatic: FALSE
